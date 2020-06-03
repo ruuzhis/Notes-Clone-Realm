@@ -21,22 +21,21 @@ class NotesListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
+    
+    //MARK: - Editing Notes List
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         // Init new List item
         let newNote = List(context: context)
         newNote.noteName = "New Note"
-        newNote.note?.parentList = newNote.value(forKey: "noteName") as? List
-        newNote.noteID = UUID()
         
         // Add new note to notesList and Context
         notesList.append(newNote)
-        saveNote()
+        saveNoteListed()
         
         // Segue to Note
-//        performSegue(withIdentifier: "goToNote", sender: self)
+        performSegue(withIdentifier: "goToNote", sender: self)
     }
     
     // MARK: - TableView Data Source
@@ -51,6 +50,8 @@ class NotesListViewController: UITableViewController {
         return cell
     }
     
+    //MARK: - TableView Methods
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToNote", sender: self)
     }
@@ -59,17 +60,16 @@ class NotesListViewController: UITableViewController {
     
     // FIXME: Does not pass over parentage
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
         let destinationVC = segue.destination as! NoteViewController
-        // Pass the selected object to the new view controller.
+     
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedNote = notesList[indexPath.row].noteID
+            destinationVC.selectedNote = notesList[indexPath.row]
         }
     }
     
     //MARK: - CoreData Manipulation Methods
     
-    func saveNote() {
+    func saveNoteListed() {
         do {
             try context.save()
         } catch {

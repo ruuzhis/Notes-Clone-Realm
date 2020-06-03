@@ -11,9 +11,13 @@ import CoreData
 
 class NoteViewController: UIViewController {
     
-    var selectedNote: UUID? {
+    var selectedNote: List? {
         didSet {
-            loadNote()
+            if selectedNote?.note != nil {
+                loadNote()
+            } else {
+                newNote()
+            }
         }
     }
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -23,22 +27,26 @@ class NoteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+        
         noteTextView.delegate = self
         
-        newNote()
-    }
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
-    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        newNote()
+        if let loadedText = noteEntity.first?.noteText {
+            noteTextView.text = loadedText
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
         textViewDidEndEditing(noteTextView)
     }
     
-    
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        textViewDidEndEditing(noteTextView)
+    }
     
     //MARK: - Model Manipulation Methods
     
-    // FIXME: Saves twice
     func saveNote() {
         do {
             try context.save()
@@ -49,6 +57,9 @@ class NoteViewController: UIViewController {
     
     func loadNote() {
         let request: NSFetchRequest<Note> = Note.fetchRequest()
+        let savedNotePredicate = NSPredicate(format: "noteListed.noteName == %@", selectedNote!.noteName!)
+        
+        request.predicate = savedNotePredicate
         
         do {
             noteEntity = try context.fetch(request)
@@ -57,20 +68,30 @@ class NoteViewController: UIViewController {
         }
     }
     
+    
     func newNote() {
         // Set up Entity within Context
         let newNote = Note(context: context)
         
         // Set up Entity properties from the ViewController
-        newNote.noteText = noteTextView.text
-        newNote.parentList?.noteID = selectedNote
+        newNote.noteText = ""
+        newNote.noteListed = selectedNote
         
         // Commit newNote to Entity
-        if noteEntity.count != 0 {
-            noteEntity.removeAll()
-        }
         noteEntity.append(newNote)
+        saveNote()
     }
+    
+    func saveEditedNote() {
+        if let editedNote = noteEntity.first {
+            editedNote.setValue(noteTextView.text, forKey: "noteText")
+            selectedNote?.setValue(noteTextView.text, forKey: "noteName")
+        }
+        
+        saveNote()
+    }
+    
+    
 }
 
 //MARK: - UITextView Delegate Methods
@@ -81,6 +102,6 @@ extension NoteViewController: UITextViewDelegate {
         DispatchQueue.main.async {
             textView.resignFirstResponder()
         }
-        saveNote()
+        saveEditedNote()
     }
 }
