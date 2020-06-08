@@ -13,6 +13,7 @@ class NotesListViewController: UITableViewController {
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     private var notesList = [List]()
+    private var newNoteCreated = false
     
     override func viewWillAppear(_ animated: Bool) {
         loadNotes()
@@ -21,6 +22,7 @@ class NotesListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.separatorStyle = .none
     }
     
     //MARK: - Editing Notes List
@@ -32,9 +34,10 @@ class NotesListViewController: UITableViewController {
         
         // Add new note to notesList and Context
         notesList.append(newNote)
-        saveNoteListed()
+        saveContext()
         
-        // Segue to Note
+        newNoteCreated = true
+                
         performSegue(withIdentifier: "goToNote", sender: self)
     }
     
@@ -47,6 +50,7 @@ class NotesListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "noteReusableID", for: indexPath)
         cell.textLabel?.text = notesList[indexPath.row].noteName
+        cell.detailTextLabel?.text = notesList[indexPath.row].noteContent
         return cell
     }
     
@@ -56,20 +60,33 @@ class NotesListViewController: UITableViewController {
         performSegue(withIdentifier: "goToNote", sender: self)
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            context.delete(notesList[indexPath.row])
+            notesList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+            
+            saveContext()
+        }
+    }
+    
     // MARK: - Navigation
     
-    // FIXME: Does not pass over parentage
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! NoteViewController
      
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.selectedNote = notesList[indexPath.row]
         }
+        
+        if newNoteCreated {
+            destinationVC.selectedNote = notesList.last
+        }
     }
     
-    //MARK: - CoreData Manipulation Methods
+    //MARK: - Model Manipulation Methods
     
-    func saveNoteListed() {
+    func saveContext() {
         do {
             try context.save()
         } catch {

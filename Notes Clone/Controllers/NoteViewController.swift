@@ -11,7 +11,7 @@ import CoreData
 
 class NoteViewController: UIViewController {
     
-    var selectedNote: List? {
+    internal var selectedNote: List? {
         didSet {
             if selectedNote?.note != nil {
                 loadNote()
@@ -20,8 +20,8 @@ class NoteViewController: UIViewController {
             }
         }
     }
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var noteEntity = [Note]()
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var noteEntity = [Note]()
     
     @IBOutlet weak var noteTextView: UITextView!
     
@@ -41,13 +41,10 @@ class NoteViewController: UIViewController {
         textViewDidEndEditing(noteTextView)
     }
     
-    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        textViewDidEndEditing(noteTextView)
-    }
     
     //MARK: - Model Manipulation Methods
     
-    func saveNote() {
+    func saveContext() {
         do {
             try context.save()
         } catch {
@@ -68,6 +65,7 @@ class NoteViewController: UIViewController {
         }
     }
     
+    //MARK: - Creating New Note
     
     func newNote() {
         // Set up Entity within Context
@@ -79,19 +77,38 @@ class NoteViewController: UIViewController {
         
         // Commit newNote to Entity
         noteEntity.append(newNote)
-        saveNote()
+    }
+    
+    //MARK: - Editing Existing Note
+    
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        textViewDidEndEditing(noteTextView)
     }
     
     func saveEditedNote() {
         if let editedNote = noteEntity.first {
             editedNote.setValue(noteTextView.text, forKey: "noteText")
-            selectedNote?.setValue(noteTextView.text, forKey: "noteName")
+            selectedNote?.setValue(noteTextView.text, forKey: "noteContent")
+            // TODO: Create Headline formatting to feed in noteName
+            if noteTextView.text == "" {
+                return
+            } else {
+                selectedNote?.setValue(noteTextView.text, forKey: "noteName")
+            }
         }
         
-        saveNote()
+        saveContext()
     }
     
+    //MARK: - ToolBar Action Methods
     
+    @IBAction func trashPressed(_ sender: UIBarButtonItem) {
+        context.delete(noteEntity.first!)
+        noteEntity.removeFirst()
+        
+        saveContext()
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 //MARK: - UITextView Delegate Methods
@@ -99,9 +116,6 @@ class NoteViewController: UIViewController {
 extension NoteViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        DispatchQueue.main.async {
-            textView.resignFirstResponder()
-        }
         saveEditedNote()
     }
 }
