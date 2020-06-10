@@ -3,33 +3,39 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96EF15019D9DEF540067DF19 /* Pods_Notes_Clone_Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA6C1CFF872EEBF82BF7B0D /* Pods_Notes_Clone_Realm.framework */; };
 		A69D9E0A247193A20041FFFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D9E09247193A20041FFFF /* AppDelegate.swift */; };
 		A69D9E0C247193A20041FFFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D9E0B247193A20041FFFF /* SceneDelegate.swift */; };
 		A69D9E0E247193A20041FFFF /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D9E0D247193A20041FFFF /* NoteViewController.swift */; };
 		A69D9E11247193A20041FFFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A69D9E0F247193A20041FFFF /* Main.storyboard */; };
-		A69D9E14247193A20041FFFF /* Notes_Clone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A69D9E12247193A20041FFFF /* Notes_Clone.xcdatamodeld */; };
 		A69D9E16247193A70041FFFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A69D9E15247193A70041FFFF /* Assets.xcassets */; };
 		A69D9E19247193A70041FFFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A69D9E17247193A70041FFFF /* LaunchScreen.storyboard */; };
 		A69D9E212471947F0041FFFF /* NotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D9E202471947F0041FFFF /* NotesListViewController.swift */; };
 		A69D9E252471955A0041FFFF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D9E242471955A0041FFFF /* Constants.swift */; };
+		A6BA8032248E8522001B4ED4 /* NotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BA8031248E8522001B4ED4 /* NotesList.swift */; };
+		A6BA8034248E8641001B4ED4 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BA8033248E8641001B4ED4 /* Note.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A69D9E06247193A20041FFFF /* Notes Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notes Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CA6C1CFF872EEBF82BF7B0D /* Pods_Notes_Clone_Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notes_Clone_Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A69D9E06247193A20041FFFF /* Notes Clone Realm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Notes Clone Realm.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A69D9E09247193A20041FFFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A69D9E0B247193A20041FFFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A69D9E0D247193A20041FFFF /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		A69D9E10247193A20041FFFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A69D9E13247193A20041FFFF /* Notes_Clone.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes_Clone.xcdatamodel; sourceTree = "<group>"; };
 		A69D9E15247193A70041FFFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A69D9E18247193A70041FFFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A69D9E1A247193A70041FFFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A69D9E202471947F0041FFFF /* NotesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewController.swift; sourceTree = "<group>"; };
 		A69D9E242471955A0041FFFF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A6BA8031248E8522001B4ED4 /* NotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesList.swift; sourceTree = "<group>"; };
+		A6BA8033248E8641001B4ED4 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		B863D8C803F61B7C0F197C80 /* Pods-Notes Clone Realm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notes Clone Realm.debug.xcconfig"; path = "Target Support Files/Pods-Notes Clone Realm/Pods-Notes Clone Realm.debug.xcconfig"; sourceTree = "<group>"; };
+		EFB7511B4E7B16A5C30D22C8 /* Pods-Notes Clone Realm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notes Clone Realm.release.xcconfig"; path = "Target Support Files/Pods-Notes Clone Realm/Pods-Notes Clone Realm.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,24 +43,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96EF15019D9DEF540067DF19 /* Pods_Notes_Clone_Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0EF96B7F1619B5F1F463F27B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1CA6C1CFF872EEBF82BF7B0D /* Pods_Notes_Clone_Realm.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7BB0CFB8F603B632FF0F180A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B863D8C803F61B7C0F197C80 /* Pods-Notes Clone Realm.debug.xcconfig */,
+				EFB7511B4E7B16A5C30D22C8 /* Pods-Notes Clone Realm.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A69D9DFD247193A20041FFFF = {
 			isa = PBXGroup;
 			children = (
 				A69D9E08247193A20041FFFF /* Notes Clone */,
 				A69D9E07247193A20041FFFF /* Products */,
+				7BB0CFB8F603B632FF0F180A /* Pods */,
+				0EF96B7F1619B5F1F463F27B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		A69D9E07247193A20041FFFF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A69D9E06247193A20041FFFF /* Notes Clone.app */,
+				A69D9E06247193A20041FFFF /* Notes Clone Realm.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,7 +120,8 @@
 		A69D9E2624753AB90041FFFF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A69D9E12247193A20041FFFF /* Notes_Clone.xcdatamodeld */,
+				A6BA8031248E8522001B4ED4 /* NotesList.swift */,
+				A6BA8033248E8641001B4ED4 /* Note.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -111,21 +138,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A69D9E05247193A20041FFFF /* Notes Clone */ = {
+		A69D9E05247193A20041FFFF /* Notes Clone Realm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A69D9E1D247193A70041FFFF /* Build configuration list for PBXNativeTarget "Notes Clone" */;
+			buildConfigurationList = A69D9E1D247193A70041FFFF /* Build configuration list for PBXNativeTarget "Notes Clone Realm" */;
 			buildPhases = (
+				2E18BD34EB3391044ECBA1D8 /* [CP] Check Pods Manifest.lock */,
 				A69D9E02247193A20041FFFF /* Sources */,
 				A69D9E03247193A20041FFFF /* Frameworks */,
 				A69D9E04247193A20041FFFF /* Resources */,
+				61757164E4B26501CBD204D4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Notes Clone";
+			name = "Notes Clone Realm";
 			productName = "Notes Clone";
-			productReference = A69D9E06247193A20041FFFF /* Notes Clone.app */;
+			productReference = A69D9E06247193A20041FFFF /* Notes Clone Realm.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -143,7 +172,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A69D9E01247193A20041FFFF /* Build configuration list for PBXProject "Notes Clone" */;
+			buildConfigurationList = A69D9E01247193A20041FFFF /* Build configuration list for PBXProject "Notes Clone Realm" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -156,7 +185,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A69D9E05247193A20041FFFF /* Notes Clone */,
+				A69D9E05247193A20041FFFF /* Notes Clone Realm */,
 			);
 		};
 /* End PBXProject section */
@@ -174,17 +203,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2E18BD34EB3391044ECBA1D8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Notes Clone Realm-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61757164E4B26501CBD204D4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Notes Clone Realm/Pods-Notes Clone Realm-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Notes Clone Realm/Pods-Notes Clone Realm-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Notes Clone Realm/Pods-Notes Clone Realm-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A69D9E02247193A20041FFFF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A69D9E0E247193A20041FFFF /* NoteViewController.swift in Sources */,
-				A69D9E14247193A20041FFFF /* Notes_Clone.xcdatamodeld in Sources */,
 				A69D9E0A247193A20041FFFF /* AppDelegate.swift in Sources */,
+				A6BA8034248E8641001B4ED4 /* Note.swift in Sources */,
 				A69D9E0C247193A20041FFFF /* SceneDelegate.swift in Sources */,
 				A69D9E212471947F0041FFFF /* NotesListViewController.swift in Sources */,
 				A69D9E252471955A0041FFFF /* Constants.swift in Sources */,
+				A6BA8032248E8522001B4ED4 /* NotesList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +398,7 @@
 		};
 		A69D9E1E247193A70041FFFF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B863D8C803F61B7C0F197C80 /* Pods-Notes Clone Realm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -335,8 +408,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rudolfslocmelis.Notes-Clone";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rudolfslocmelis.Notes-Clone-Realm";
+				PRODUCT_NAME = "Notes Clone Realm";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -344,6 +417,7 @@
 		};
 		A69D9E1F247193A70041FFFF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EFB7511B4E7B16A5C30D22C8 /* Pods-Notes Clone Realm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -353,8 +427,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.rudolfslocmelis.Notes-Clone";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rudolfslocmelis.Notes-Clone-Realm";
+				PRODUCT_NAME = "Notes Clone Realm";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -363,7 +437,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A69D9E01247193A20041FFFF /* Build configuration list for PBXProject "Notes Clone" */ = {
+		A69D9E01247193A20041FFFF /* Build configuration list for PBXProject "Notes Clone Realm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A69D9E1B247193A70041FFFF /* Debug */,
@@ -372,7 +446,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A69D9E1D247193A70041FFFF /* Build configuration list for PBXNativeTarget "Notes Clone" */ = {
+		A69D9E1D247193A70041FFFF /* Build configuration list for PBXNativeTarget "Notes Clone Realm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A69D9E1E247193A70041FFFF /* Debug */,
@@ -382,19 +456,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A69D9E12247193A20041FFFF /* Notes_Clone.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A69D9E13247193A20041FFFF /* Notes_Clone.xcdatamodel */,
-			);
-			currentVersion = A69D9E13247193A20041FFFF /* Notes_Clone.xcdatamodel */;
-			path = Notes_Clone.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A69D9DFE247193A20041FFFF /* Project object */;
 }

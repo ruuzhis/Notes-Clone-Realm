@@ -7,21 +7,21 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class NoteViewController: UIViewController {
     
-    internal var selectedNote: List? {
+    internal var selectedNote: NotesList? {
         didSet {
-            if selectedNote?.note != nil {
+            if selectedNote?.note.first != nil {
                 loadNote()
             } else {
                 newNote()
             }
         }
     }
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private var noteEntity = [Note]()
+    private let realm = try! Realm()
+    private var noteObject = Note()
     
     @IBOutlet weak var noteTextView: UITextView!
     
@@ -32,51 +32,31 @@ class NoteViewController: UIViewController {
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
-        if let loadedText = noteEntity.first?.noteText {
-            noteTextView.text = loadedText
-        }
+        noteTextView.text = noteObject.noteText
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        textViewDidEndEditing(noteTextView)
+        if noteObject.isInvalidated {
+            return
+        } else {
+            textViewDidEndEditing(noteTextView)
+        }
     }
     
     
     //MARK: - Model Manipulation Methods
     
-    func saveContext() {
-        do {
-            try context.save()
-        } catch {
-            print("Error saving context, \(error)")
-        }
-    }
-    
     func loadNote() {
-        let request: NSFetchRequest<Note> = Note.fetchRequest()
-        let savedNotePredicate = NSPredicate(format: "noteListed.noteName == %@", selectedNote!.noteName!)
-        
-        request.predicate = savedNotePredicate
-        
-        do {
-            noteEntity = try context.fetch(request)
-        } catch {
-            print("Error fetching through context, \(error)")
-        }
+        noteObject = realm.objects(Note.self).filter("noteListed == %@", selectedNote!).first!
     }
     
     //MARK: - Creating New Note
     
     func newNote() {
-        // Set up Entity within Context
-        let newNote = Note(context: context)
-        
-        // Set up Entity properties from the ViewController
-        newNote.noteText = ""
-        newNote.noteListed = selectedNote
-        
-        // Commit newNote to Entity
-        noteEntity.append(newNote)
+        try! realm.write {
+            noteObject.setValuesForKeys(["noteText": "", "noteListed":  selectedNote!])
+            realm.add(noteObject)
+        }
     }
     
     //MARK: - Editing Existing Note
@@ -86,9 +66,10 @@ class NoteViewController: UIViewController {
     }
     
     func saveEditedNote() {
-        if let editedNote = noteEntity.first {
-            editedNote.setValue(noteTextView.text, forKey: "noteText")
+        try! realm.write {
+            noteObject.setValue(noteTextView.text, forKey: "noteText")
             selectedNote?.setValue(noteTextView.text, forKey: "noteContent")
+            
             // TODO: Create Headline formatting to feed in noteName
             if noteTextView.text == "" {
                 return
@@ -96,18 +77,21 @@ class NoteViewController: UIViewController {
                 selectedNote?.setValue(noteTextView.text, forKey: "noteName")
             }
         }
-        
-        saveContext()
     }
     
     //MARK: - ToolBar Action Methods
     
     @IBAction func trashPressed(_ sender: UIBarButtonItem) {
-        context.delete(noteEntity.first!)
-        noteEntity.removeFirst()
+        do {
+            try realm.write {
+                realm.delete(noteObject)
+                realm.delete(selectedNote!)
+                navigationController?.popViewController(animated: true)
+            }
+        } catch {
+            print("Error deleting from Realm, \(error)")
+        }
         
-        saveContext()
-        navigationController?.popViewController(animated: true)
     }
 }
 

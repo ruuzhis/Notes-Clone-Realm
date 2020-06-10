@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class NotesListViewController: UITableViewController {
     
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    private var notesList = [List]()
+    private let realm = try! Realm()
+    private var notesList: Results<NotesList>?
     private var newNoteCreated = false
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,28 +29,26 @@ class NotesListViewController: UITableViewController {
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         // Init new List item
-        let newNote = List(context: context)
+        let newNote = NotesList()
         newNote.noteName = "New Note"
         
         // Add new note to notesList and Context
-        notesList.append(newNote)
-        saveContext()
-        
+        saveRealm(note: newNote)
         newNoteCreated = true
-                
+        
         performSegue(withIdentifier: "goToNote", sender: self)
     }
     
     // MARK: - TableView Data Source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notesList.count
+        return notesList?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "noteReusableID", for: indexPath)
-        cell.textLabel?.text = notesList[indexPath.row].noteName
-        cell.detailTextLabel?.text = notesList[indexPath.row].noteContent
+        cell.textLabel?.text = notesList?[indexPath.row].noteName
+        cell.detailTextLabel?.text = notesList?[indexPath.row].noteContent
         return cell
     }
     
@@ -62,11 +60,17 @@ class NotesListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            context.delete(notesList[indexPath.row])
-            notesList.remove(at: indexPath.row)
+            if let noteToDelete = notesList?[indexPath.row] {
+                do {
+                    try realm.write {
+                        realm.delete(noteToDelete.note.first!)
+                        realm.delete(noteToDelete)
+                    }
+                } catch {
+                    print("Error deleting from Realm, \(error)")
+                }
+            }
             tableView.deleteRows(at: [indexPath], with: .left)
-            
-            saveContext()
         }
     }
     
@@ -74,21 +78,23 @@ class NotesListViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! NoteViewController
-     
+        
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedNote = notesList[indexPath.row]
+            destinationVC.selectedNote = notesList?[indexPath.row]
         }
         
         if newNoteCreated {
-            destinationVC.selectedNote = notesList.last
+            destinationVC.selectedNote = notesList?.last
         }
     }
     
     //MARK: - Model Manipulation Methods
     
-    func saveContext() {
+    func saveRealm(note: NotesList) {
         do {
-            try context.save()
+            try realm.write {
+                realm.add(note)
+            }
         } catch {
             print("Error saving context to List, \(error)")
         }
@@ -97,13 +103,7 @@ class NotesListViewController: UITableViewController {
     }
     
     func loadNotes() {
-        let request: NSFetchRequest<List> = List.fetchRequest()
-        
-        do {
-            notesList = try context.fetch(request)
-        } catch {
-            print("Could not load context for List, \(error)")
-        }
+        notesList = realm.objects(NotesList.self)
         
         tableView.reloadData()
     }
